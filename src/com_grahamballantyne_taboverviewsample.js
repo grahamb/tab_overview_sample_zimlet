@@ -20,7 +20,7 @@ com_grahamballantyne_taboverviewsample_app.prototype.constructor = com_grahambal
  * @returns null
  */
 com_grahamballantyne_taboverviewsample_app.prototype.init = function() {
-	this._tabsampleapp = this.createApp('Tab Overview Sample', 'gnbIcon', 'Example of programmatically creating an overview (tree) in a tab zimlet.');
+	this._tabsampleapp = this.createApp('Tab Overview Sample', 'GNB-panelIcon', 'Example of programmatically creating an overview (tree) in a tab zimlet.');
 	
 };
 
@@ -53,7 +53,7 @@ com_grahamballantyne_taboverviewsample_app.prototype.appLaunch = function(appNam
  * @@param {String} active if true, the application status is open; otherwise false
  * @returns null
  */
-ca_sfu_icat_mysfu_app.prototype.appActive = function(appName, active) {
+com_grahamballantyne_taboverviewsample_app.prototype.appActive = function(appName, active) {
 	switch(appName) {
 		case this._tabsampleapp: {
 			if (active) {
@@ -65,6 +65,9 @@ ca_sfu_icat_mysfu_app.prototype.appActive = function(appName, active) {
 		}
 	}
 };
+
+
+
 
 // ------ OVERVIEW CREATION -------------------------------------------------------------
 
@@ -175,14 +178,15 @@ com_grahamballantyne_taboverviewsample_app.prototype.buildOverview = function() 
 		,	i = buildoverviewHtml.length
 		,	thisGroup = folderGroups[group];
 		
-		buildoverviewHtml[this.__i++] = this._buildFolderGroupHtml(thisGroup);
+		buildoverviewHtml[i++] = this._buildFolderGroupHtml(thisGroup);
 		var folderGroupNode = document.createElement('div')
-		,	id = Dwt.getNextId()
+		,	id = folderGroups[group].id
 		,	className = 'DwtComposite';
 		folderGroupNode.setAttribute('id', id);
 		folderGroupNode.setAttribute('class', className);
 		folderGroupNode.innerHTML = buildoverviewHtml.join('');
-		folderGroupNode.AjxCallback.simpleClosure(thisGroup.handler, this);
+		var folderGroupClickHandler = thisGroup.handler ? thisGroup.handler : null;
+		folderGroupNode.onclick = AjxCallback.simpleClosure(this._overviewClickHandler, thisGroup);
 		overviewEl.appendChild(folderGroupNode);		
 	}
 };
@@ -199,7 +203,6 @@ com_grahamballantyne_taboverviewsample_app.prototype.buildOverview = function() 
 com_grahamballantyne_taboverviewsample_app.prototype._buildFolderGroupHtml = function(folderGroup) {
 	this.overviewHtml = [];
 	this.__i = this.overviewHtml.length;
-	
 	// HEADER
 	var headerId = Dwt.getNextId();
 	this.overviewHtml[this.__i++] = '<div class="overviewHeader">';
@@ -226,7 +229,6 @@ com_grahamballantyne_taboverviewsample_app.prototype._buildFolderGroupHtml = fun
 		this._renderFoldersHtml(folderGroup.folders[folder]);
 	}
 	this.overviewHtml[this.__i++] = '</div>';
-	
 	return this.overviewHtml.join('');
 };
 
@@ -239,7 +241,7 @@ com_grahamballantyne_taboverviewsample_app.prototype._buildFolderGroupHtml = fun
  * @returns Describe what it returns
  * @type String|Object|Array|Boolean|Number
  */
-ca_sfu_icat_mysfu_app.prototype._renderFoldersHtml = function(folder, level) {
+com_grahamballantyne_taboverviewsample_app.prototype._renderFoldersHtml = function(folder, level) {
 
 	var collapsable = folder.hasOwnProperty('subfolders') ? true : false,
 		level = level ? level : 1,
@@ -308,6 +310,45 @@ ca_sfu_icat_mysfu_app.prototype._renderFoldersHtml = function(folder, level) {
 // ------ CLICK HANDLERS ----------------------------------------------------------------                                  
 
 /**
+ * Main click handler for overview items.
+ * If the user clicked on a collapse/expand handle, collapse or expand the folder group.
+ * If the user clicked something else AND a click handler was specified, run the handler, passing in the ID of the overview item.
+ * @private
+ * @param {Object} ev Event object
+ * @param {Function} handlerFunc Click handler function
+ * @returns null
+ */
+com_grahamballantyne_taboverviewsample_app.prototype._overviewClickHandler = function(ev) {
+	if (AjxEnv.isIE) {
+		ev = window.event;
+	}
+	// debugger;
+	var dwtev = DwtShell.mouseEvent;
+	dwtev.setFromDhtmlEvent(ev);
+	var el = dwtev.target;
+	var origTarget = dwtev.target;
+	if (origTarget.className == "ImgNodeExpanded" || origTarget.className == "ImgNodeCollapsed") {
+		var toHide = $(el).parent().parentsUntil('.DwtComposite').parent().next().first();		
+		toHide.toggle();
+		if (origTarget.className == "ImgNodeExpanded") {
+			origTarget.className = "ImgNodeCollapsed";
+		} else {
+			origTarget.className = "ImgNodeExpanded";
+		}
+	} else if (this.handler) {
+		this.handler();
+	}
+	// 
+	// if (handlerFunc) {
+	// 	while (el && el.className != "DwtTreeItem") {
+	// 		el = el.parentNode;
+	// 	}
+	// 	var elId = el.id;
+	// 	handlerFunc(elId);
+	// }
+};
+
+/**
  * Describe what this method does
  * @private
  * @param {String|Object|Array|Boolean|Number} paramName Describe this parameter
@@ -315,7 +356,7 @@ ca_sfu_icat_mysfu_app.prototype._renderFoldersHtml = function(folder, level) {
  * @type String|Object|Array|Boolean|Number
  */
 com_grahamballantyne_taboverviewsample_app.prototype._groupOneHandler = function() {
-	
+	console.log('_groupOneHandler');
 };
 
 /**
@@ -326,7 +367,7 @@ com_grahamballantyne_taboverviewsample_app.prototype._groupOneHandler = function
  * @type String|Object|Array|Boolean|Number
  */
 com_grahamballantyne_taboverviewsample_app.prototype._groupTwoHandler = function() {
-	
+	console.log('_groupTwoHandler');
 };
 
 /**
@@ -337,7 +378,7 @@ com_grahamballantyne_taboverviewsample_app.prototype._groupTwoHandler = function
  * @type String|Object|Array|Boolean|Number
  */
 com_grahamballantyne_taboverviewsample_app.prototype._groupThreeHandler = function() {
-	
+	console.log('_groupThreeHandler');
 };
 
 
