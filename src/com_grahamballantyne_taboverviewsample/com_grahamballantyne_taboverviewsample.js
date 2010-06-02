@@ -17,7 +17,7 @@ com_grahamballantyne_taboverviewsample_app.prototype.constructor = com_grahambal
 
 /**
  * Init method
- * @returns null
+ * @public
  */
 com_grahamballantyne_taboverviewsample_app.prototype.init = function() {
 	this._tabsampleapp = this.createApp('Tab Overview Sample', 'GNB-panelIcon', 'Example of programmatically creating an overview (tree) in a tab zimlet.');
@@ -30,7 +30,6 @@ com_grahamballantyne_taboverviewsample_app.prototype.init = function() {
  * AppLaunch runs the first time a tab is clicked
  * @public
  * @param {String} appName the application name
- * @returns null
  */
 com_grahamballantyne_taboverviewsample_app.prototype.appLaunch = function(appName) {
 	switch(appName) {
@@ -52,7 +51,6 @@ com_grahamballantyne_taboverviewsample_app.prototype.appLaunch = function(appNam
  * @public
  * @param {String} appName the application name
  * @@param {String} active if true, the application status is open; otherwise false
- * @returns null
  */
 com_grahamballantyne_taboverviewsample_app.prototype.appActive = function(appName, active) {
 	switch(appName) {
@@ -82,7 +80,6 @@ com_grahamballantyne_taboverviewsample_app.prototype.appActive = function(appNam
  * The handler function is specified in the folderGroup object literal as either a reference to an existing function or as an inline anonymous function.
  * 
  * @public
- * @returns null
  */
 com_grahamballantyne_taboverviewsample_app.prototype.buildOverview = function() {
 	var activeApp = appCtxt.getCurrentApp()
@@ -265,9 +262,8 @@ com_grahamballantyne_taboverviewsample_app.prototype._buildFolderGroupHtml = fun
  * Called recursively by this._buildFolderGroupHtml to generate HTML for individual folder items and subfolders.
  * 
  * @private
- * @param {Object}	folder		Describe this parameter
- * @returns Describe what it returns
- * @type String|Object|Array|Boolean|Number
+ * @param {Object}	folder		Folder object
+ * @param {Number} level		Indicates the level of indentation in subfolders. Only passed in by this function when it calls itself recursively.
  */
 com_grahamballantyne_taboverviewsample_app.prototype._renderFoldersHtml = function(folder, level) {
 
@@ -341,10 +337,10 @@ com_grahamballantyne_taboverviewsample_app.prototype._renderFoldersHtml = functi
  * Main click handler for overview items.
  * If the user clicked on a collapse/expand handle, collapse or expand the folder group.
  * If the user clicked something else AND a click handler was specified, run the handler, passing in the ID of the overview item.
+ * 
  * @private
  * @param {Object} ev Event object
  * @param {Function} handlerFunc Click handler function
- * @returns null
  */
 com_grahamballantyne_taboverviewsample_app.prototype._overviewClickHandler = function(ev) {
 	if (AjxEnv.isIE) {
@@ -373,28 +369,13 @@ com_grahamballantyne_taboverviewsample_app.prototype._overviewClickHandler = fun
 	}
 };
 
-/**
- * Describe what this method does
- * @private
- * @param {String|Object|Array|Boolean|Number} paramName Describe this parameter
- * @returns Describe what it returns
- * @type String|Object|Array|Boolean|Number
- */
-// com_grahamballantyne_taboverviewsample_app.prototype._groupOneHandler = function(elId) {
-// 	var msg = 'You clicked an item in Group One with an ID of ' + elId
-// 	,	dlg = appCtxt.getMsgDialog()
-// 	,	style = DwtMessageDialog.INFO_STYLE;
-// 	dlg.reset();
-// 	dlg.setMessage(msg, style);
-// 	dlg.popup();
-// };
+
 
 /**
- * Describe what this method does
+ * Click handler for "folder group two". Displays a DwtMsgDialog showing the ID of the selected node.
+ * 
  * @private
- * @param {String|Object|Array|Boolean|Number} paramName Describe this parameter
- * @returns Describe what it returns
- * @type String|Object|Array|Boolean|Number
+ * @param {String}	elId		ID of the node clicked on in the overview
  */
 com_grahamballantyne_taboverviewsample_app.prototype._groupTwoHandler = function(elId) {
 	var msg = 'You clicked an item in Group Two with an ID of ' + elId
@@ -405,12 +386,13 @@ com_grahamballantyne_taboverviewsample_app.prototype._groupTwoHandler = function
 	dlg.popup();
 };
 
+
+
 /**
- * Describe what this method does
+ * Click handler for "folder group three". Displays a DwtMsgDialog showing the ID of the selected node.
+ * 
  * @private
- * @param {String|Object|Array|Boolean|Number} paramName Describe this parameter
- * @returns Describe what it returns
- * @type String|Object|Array|Boolean|Number
+ * @param {String}	elId		ID of the node clicked on in the overview
  */
 com_grahamballantyne_taboverviewsample_app.prototype._groupThreeHandler = function(elId) {
 	var msg = 'You clicked an item in Group Three with an ID of ' + elId
