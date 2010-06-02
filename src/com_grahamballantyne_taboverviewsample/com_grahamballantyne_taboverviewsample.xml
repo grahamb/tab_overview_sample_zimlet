@@ -1,0 +1,9 @@
+<zimlet name="com_grahamballantyne_taboverviewsample" version="1.0" description="Sample Overview Tab Zimlet">
+	<summary>
+		Example of programmatically creating a tab zimlet's overview menu 
+	</summary>
+	<include>com_grahamballantyne_taboverviewsample.js</include>
+	<includeCSS>com_grahamballantyne_taboverviewsample.css</includeCSS>
+	<resource>gnb.jpg</resource>
+	<handlerObject>com_grahamballantyne_taboverviewsample_app</handlerObject>
+</zimlet>
