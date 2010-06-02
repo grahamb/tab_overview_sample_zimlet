@@ -363,7 +363,12 @@ com_grahamballantyne_taboverviewsample_app.prototype._overviewClickHandler = fun
  * @type String|Object|Array|Boolean|Number
  */
 com_grahamballantyne_taboverviewsample_app.prototype._groupOneHandler = function(elId) {
-	console.log('_groupOneHandler', elId);
+	var msg = 'You clicked an item in Group One with an ID of ' + elId
+	,	dlg = appCtxt.getMsgDialog()
+	,	style = DwtMessageDialog.INFO_STYLE;
+	dlg.reset();
+	dlg.setMessage(msg, style);
+	dlg.popup();
 };
 
 /**
@@ -374,7 +379,12 @@ com_grahamballantyne_taboverviewsample_app.prototype._groupOneHandler = function
  * @type String|Object|Array|Boolean|Number
  */
 com_grahamballantyne_taboverviewsample_app.prototype._groupTwoHandler = function(elId) {
-	console.log('_groupTwoHandler', elId);
+	var msg = 'You clicked an item in Group Two with an ID of ' + elId
+	,	dlg = appCtxt.getMsgDialog()
+	,	style = DwtMessageDialog.INFO_STYLE;
+	dlg.reset();
+	dlg.setMessage(msg, style);
+	dlg.popup();
 };
 
 /**
@@ -385,7 +395,12 @@ com_grahamballantyne_taboverviewsample_app.prototype._groupTwoHandler = function
  * @type String|Object|Array|Boolean|Number
  */
 com_grahamballantyne_taboverviewsample_app.prototype._groupThreeHandler = function(elId) {
-	console.log('_groupThreeHandler',elId);
+	var msg = 'You clicked an item in Group Three with an ID of ' + elId
+	,	dlg = appCtxt.getMsgDialog()
+	,	style = DwtMessageDialog.INFO_STYLE;
+	dlg.reset();
+	dlg.setMessage(msg, style);
+	dlg.popup();
 };
 
 
