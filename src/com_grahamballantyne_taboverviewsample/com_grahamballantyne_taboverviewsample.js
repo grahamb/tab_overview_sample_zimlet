@@ -5,7 +5,7 @@
  * @author Graham Ballantyne hello@grahamballantyne.com
  * @version 1.0
  */
-var ev;
+
 function com_grahamballantyne_taboverviewsample_app() {};
 
 com_grahamballantyne_taboverviewsample_app.prototype = new ZmZimletBase();
@@ -48,6 +48,7 @@ com_grahamballantyne_taboverviewsample_app.prototype.appLaunch = function(appNam
 
 /**
  * Runs each time the application is opened or closed (e.g. when tab is clicked into or away from)
+ * 
  * @public
  * @param {String} appName the application name
  * @@param {String} active if true, the application status is open; otherwise false
@@ -81,9 +82,7 @@ com_grahamballantyne_taboverviewsample_app.prototype.appActive = function(appNam
  * The handler function is specified in the folderGroup object literal as either a reference to an existing function or as an inline anonymous function.
  * 
  * @public
- * @param {String|Object|Array|Boolean|Number} paramName Describe this parameter
- * @returns Describe what it returns
- * @type String|Object|Array|Boolean|Number
+ * @returns null
  */
 com_grahamballantyne_taboverviewsample_app.prototype.buildOverview = function() {
 	var activeApp = appCtxt.getCurrentApp()
@@ -206,7 +205,7 @@ com_grahamballantyne_taboverviewsample_app.prototype.buildOverview = function() 
 		buildoverviewHtml[i++] = this._buildFolderGroupHtml(thisGroup);
 		var folderGroupNode = document.createElement('div')
 		,	id = folderGroups[group].id
-		,	className = 'DwtComposite';
+		,	className = 'DwtComposite overviewFolderGroup';
 		folderGroupNode.setAttribute('id', id);
 		folderGroupNode.setAttribute('class', className);
 		folderGroupNode.innerHTML = buildoverviewHtml.join('');
@@ -219,11 +218,14 @@ com_grahamballantyne_taboverviewsample_app.prototype.buildOverview = function() 
 
 
 /**
- * Describe what this method does
+ * Creates the HTML for a folder group element in the tab zimlet overview tree view.
+ * Recursively calls this._renderFoldersHtml for each folder (and subfolder) contained in the group.
+ * 
  * @private
- * @param {String|Object|Array|Boolean|Number} paramName Describe this parameter
- * @returns Describe what it returns
- * @type String|Object|Array|Boolean|Number
+ * @see #com_grahamballantyne_taboverviewsample_app.prototype.buildOverview
+ * @param {Object}	folderGroup		The individual folder group object
+ * @returns HTML fragment
+ * @type String
  */
 com_grahamballantyne_taboverviewsample_app.prototype._buildFolderGroupHtml = function(folderGroup) {
 	this.overviewHtml = [];
@@ -260,9 +262,10 @@ com_grahamballantyne_taboverviewsample_app.prototype._buildFolderGroupHtml = fun
 
 
 /**
- * Describe what this method does
+ * Called recursively by this._buildFolderGroupHtml to generate HTML for individual folder items and subfolders.
+ * 
  * @private
- * @param {String|Object|Array|Boolean|Number} paramName Describe this parameter
+ * @param {Object}	folder		Describe this parameter
  * @returns Describe what it returns
  * @type String|Object|Array|Boolean|Number
  */
