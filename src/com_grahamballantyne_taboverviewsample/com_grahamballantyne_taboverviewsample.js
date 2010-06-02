@@ -72,7 +72,14 @@ com_grahamballantyne_taboverviewsample_app.prototype.appActive = function(appNam
 // ------ OVERVIEW CREATION -------------------------------------------------------------
 
 /**
- * Describe what this method does
+ * Builds an tab overview tree view from an object literal of "folder items".
+ * Folder items are grouped into Groups.
+ * Each folder item can have an icon (or not) and an arbitrary number of subfolders.
+ * Subfolder items can have an icon (or not) and an arbitrary number of subfolders (and so on...)
+ * 
+ * A group can have a handler function associated with it. The handler function receives click events on items within the folder group.
+ * The handler function is specified in the folderGroup object literal as either a reference to an existing function or as an inline anonymous function.
+ * 
  * @public
  * @param {String|Object|Array|Boolean|Number} paramName Describe this parameter
  * @returns Describe what it returns
@@ -87,7 +94,15 @@ com_grahamballantyne_taboverviewsample_app.prototype.buildOverview = function() 
 		{
 			name: "Group One",
 			id: "tabsample_groupOne",
-			handler: this._groupOneHandler,
+			//handler: this._groupOneHandler,
+			handler: function(elId) {
+				var msg = 'Handler is an inline anonymous function. <br/> You clicked an item in Group One with an ID of ' + elId
+				,	dlg = appCtxt.getMsgDialog()
+				,	style = DwtMessageDialog.INFO_STYLE;
+				dlg.reset();
+				dlg.setMessage(msg, style);
+				dlg.popup();
+			},
 			folders: {
 				item1: {
 					name: "Group One Item One",
@@ -362,14 +377,14 @@ com_grahamballantyne_taboverviewsample_app.prototype._overviewClickHandler = fun
  * @returns Describe what it returns
  * @type String|Object|Array|Boolean|Number
  */
-com_grahamballantyne_taboverviewsample_app.prototype._groupOneHandler = function(elId) {
-	var msg = 'You clicked an item in Group One with an ID of ' + elId
-	,	dlg = appCtxt.getMsgDialog()
-	,	style = DwtMessageDialog.INFO_STYLE;
-	dlg.reset();
-	dlg.setMessage(msg, style);
-	dlg.popup();
-};
+// com_grahamballantyne_taboverviewsample_app.prototype._groupOneHandler = function(elId) {
+// 	var msg = 'You clicked an item in Group One with an ID of ' + elId
+// 	,	dlg = appCtxt.getMsgDialog()
+// 	,	style = DwtMessageDialog.INFO_STYLE;
+// 	dlg.reset();
+// 	dlg.setMessage(msg, style);
+// 	dlg.popup();
+// };
 
 /**
  * Describe what this method does
