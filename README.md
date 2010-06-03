@@ -7,7 +7,7 @@ Forum post: []()
 
 Zimbra Collaboration Suite version 6.0 (ZCS6) introduced the concept of a 'tab zimlet' -- a zimlet that resides as an application tab at the top of the window, a la Mail, Calendar, etc. These zimlets primairly have two areas: a main view on the right and an overview area on the left. The most common use of the overview area is to display a folder tree, like that in the Mail app. The [Social Zimlet](http://gallery.zimbra.com/type/zimlet/social-zimlet) it a good example of this pattern (see [http://img.skitch.com/20100603-fhnqpdeyh9g2tm2b4m9cxqaijq.png](http://img.skitch.com/20100603-fhnqpdeyh9g2tm2b4m9cxqaijq.png) for a screenshot).
 
-![social zimlet screenshot](http://img.skitch.com/20100603-fhnqpdeyh9g2tm2b4m9cxqaijq.png)
+![social zimlet screenshot](http://img.skitch.com/20100603-rdk7prae435cgqqwu4xy1r293r.png)
 
 A frequent question on the Zimbra forums has been "how do I create a overview tree?" I have been working on a tab zimlet for our Zimbra installation and I had the same question. The [Zimlet Developer's Guide](http://wiki.zimbra.com/wiki/ZCS_6.0:Zimlet_Developers_Guide:Introduction) is silent on this issue. After doing some poking around in the Zimbra source and the Social Zimlet, I discovered the following:
 
@@ -129,7 +129,7 @@ var folderGroups = [
 `
 
 The above object literal would generate a tree that looks like [this](http://img.skitch.com/20100603-nutb5b2c3625x5gdf9i3ccbqmp.png):
-![sample zimlet screenshot](http://img.skitch.com/20100603-nutb5b2c3625x5gdf9i3ccbqmp.png)
+![sample zimlet screenshot](http://img.skitch.com/20100603-j7pg8xwjwr14i9xx5yppp6uejk.png)
 
 Folder Groups are an object containing a number of folders/items, each of which can have a number of subfolders/items (and so on). For example, the first group, __Group One__ is described thusly: 
 
