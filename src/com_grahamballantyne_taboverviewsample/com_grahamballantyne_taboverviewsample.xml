@@ -4,6 +4,7 @@
 	</summary>
 	<include>com_grahamballantyne_taboverviewsample.js</include>
 	<includeCSS>com_grahamballantyne_taboverviewsample.css</includeCSS>
+	<include>views/overview.template.js</include>
 	<resource>gnb.jpg</resource>
 	<handlerObject>com_grahamballantyne_taboverviewsample_app</handlerObject>
 </zimlet>

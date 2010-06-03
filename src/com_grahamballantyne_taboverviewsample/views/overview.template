@@ -1,0 +1,60 @@
+<template id="folderGroup">
+	<div class="overviewHeader">
+		<table cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<td style="width:16pxheight:16px" align="center">
+						<div class="ImgNodeExpanded" id="overview_expandIcon_<$= data.headerId $>"></div>
+					</td>
+					<td class="imageCell"></td>
+					<td class="overviewHeader-Text">
+						<$= data.name $>
+					</td>
+					<td style="width:16pxheight:16px">
+						<div class="overviewHeader-Icon ImgBlank_16"></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="containerGroup">
+</template>
+
+<template id="folderItemOpen">
+		<div class="DwtComposite">
+			<div class="DwtTreeItem" id="<$= data.id $>">
+				<table width="100%" cellpadding="0" cellspacing="0"><tbody>
+					<tr>
+</template>
+
+<template id="folderItemLevel">
+						<td style="width:16px;height:16px" align="center">
+							<div class="ImgBlank_16"></div>
+						</td>
+</template>
+
+<template id="folderItemCollapsable">
+						<td style="width:16px;height:16px" align="center">
+							<div class="ImgNodeExpanded" id="overview_expandIcon_<$= data.id $>"></div>
+						</td>
+</template>
+
+<template id="folderItemIcon">
+						<td style="width:16px;height:16px;padding-right:5px">
+							<div class="<$= data.icon $>"></div>
+						</td>
+</template>
+
+<template id="folderItemClose">
+						<td class="DwtTreeItem-Text" nowrap="nowrap">
+							<$= data.name $>
+						</td>
+						<td style="width:16px;height:16px;padding-right:5px">
+							<div class="ImgBlank_16"></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</template>

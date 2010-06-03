@@ -228,27 +228,12 @@ com_grahamballantyne_taboverviewsample_app.prototype._buildFolderGroupHtml = fun
 	this.overviewHtml = [];
 	this.__i = this.overviewHtml.length;
 	// HEADER
-	var headerId = Dwt.getNextId();
-	this.overviewHtml[this.__i++] = '<div class="overviewHeader">';
-	this.overviewHtml[this.__i++] = '<table cellpadding="0" cellspacing="0">';
-	this.overviewHtml[this.__i++] = '<tbody>';
-	this.overviewHtml[this.__i++] = '<tr>';
-	this.overviewHtml[this.__i++] = '<td style="width:16px;height:16px" align="center">';
-	this.overviewHtml[this.__i++] = '<div class="ImgNodeExpanded" id="';	
-	this.overviewHtml[this.__i++] = 'mysfu_expandIcon_';
-	this.overviewHtml[this.__i++] = headerId;
-	this.overviewHtml[this.__i++] = '"></div>';
-	this.overviewHtml[this.__i++] = '</td>';
-	this.overviewHtml[this.__i++] = '<td class="imageCell"></td>';
-	this.overviewHtml[this.__i++] = '<td class="overviewHeader-Text">';
-	this.overviewHtml[this.__i++] = folderGroup.name; 
-	this.overviewHtml[this.__i++] = '</td>';
-	this.overviewHtml[this.__i++] = '<td style="width:16px;height:16px">';
-	this.overviewHtml[this.__i++] = '<div class="ImgBlank_16"></div>';
-	this.overviewHtml[this.__i++] = '</td></tr></tbody></table></div>';
+	var headerId = Dwt.getNextId()
+	,	fgTemplateData = {headerId: headerId, name: folderGroup.name};	
+	
+	this.overviewHtml[this.__i++] = AjxTemplate.expand("com_grahamballantyne_taboverviewsample.views.overview#folderGroup", fgTemplateData);
 	
 	// FOLDERS/ITEMS
-	this.overviewHtml[this.__i++] = '<div class="containerGroup">';
 	for (var folder in folderGroup.folders) {
 		this._renderFoldersHtml(folderGroup.folders[folder]);
 	}
@@ -271,52 +256,24 @@ com_grahamballantyne_taboverviewsample_app.prototype._renderFoldersHtml = functi
 		level = level ? level : 1,
 		id = folder.id ? folder.id : Dwt.getNextId();
 
-	this.overviewHtml[this.__i++] = '<div class="DwtComposite">';
-	this.overviewHtml[this.__i++] = '<div class="DwtTreeItem" id="';
-	this.overviewHtml[this.__i++] = id;
-	this.overviewHtml[this.__i++] = '">';
-	this.overviewHtml[this.__i++] = '<table width="100%" cellpadding="0" cellspacing="0"><tbody><tr>';
-
+	this.overviewHtml[this.__i++] = AjxTemplate.expand("com_grahamballantyne_taboverviewsample.views.overview#folderItemOpen", {id:id});
+	
 	if (collapsable) { var restoreLevel = level; level -= 1; }
 
 	for (var i = level - 1; i >= 0; i--){
-		this.overviewHtml[this.__i++] = '<td style="width:16px;height:16px" align="center">';
-        this.overviewHtml[this.__i++] = '<div class="ImgBlank_16"></div>';
-        this.overviewHtml[this.__i++] = '</td>';
+		this.overviewHtml[this.__i++] = AjxTemplate.expand("com_grahamballantyne_taboverviewsample.views.overview#folderItemLevel", {});
 	};
 
 	if (collapsable) {
-		// collapse handle; default to open (expanded)
-		this.overviewHtml[this.__i++] = '<td style="width:16px;height:16px" align="center">';
-		this.overviewHtml[this.__i++] = '<div class="ImgNodeExpanded" id="mysfu_expandIcon_';
-		this.overviewHtml[this.__i++] =  Dwt.getNextId();
-		this.overviewHtml[this.__i++] = '"></div>';
-		this.overviewHtml[this.__i++] = '</td>';
+		this.overviewHtml[this.__i++] = AjxTemplate.expand("com_grahamballantyne_taboverviewsample.views.overview#folderItemCollapsable", {id: Dwt.getNextId()});
 	}
 
 	if (folder.icon) {
-		this.overviewHtml[this.__i++] = '<td style="width:16px;height:16px;padding-right:5px">';
-		this.overviewHtml[this.__i++] = '<div class="';
-		this.overviewHtml[this.__i++] = folder.icon;
-		this.overviewHtml[this.__i++] = '"></div>';
-		this.overviewHtml[this.__i++] = '</td>';
-
+		this.overviewHtml[this.__i++] = AjxTemplate.expand("com_grahamballantyne_taboverviewsample.views.overview#folderItemIcon", {icon: folder.icon});
 	}
 
-	this.overviewHtml[this.__i++] = '<td class="DwtTreeItem-Text" nowrap="nowrap">';
-	this.overviewHtml[this.__i++] = folder.name;
-	this.overviewHtml[this.__i++] = '</td>';
-
-	this.overviewHtml[this.__i++] = '<td style="width:16px;height:16px;padding-right:5px">';
-	this.overviewHtml[this.__i++] = '<div class="ImgBlank_16"></div>';
-	this.overviewHtml[this.__i++] = '</td>';
-	this.overviewHtml[this.__i++] = '</tr>';
-	this.overviewHtml[this.__i++] = '</tbody>';
-	this.overviewHtml[this.__i++] = '</table>';
-	this.overviewHtml[this.__i++] = '</div>';
-
-	this.overviewHtml[this.__i++] = '</div>';
-
+	this.overviewHtml[this.__i++] = AjxTemplate.expand("com_grahamballantyne_taboverviewsample.views.overview#folderItemClose", {name: folder.name});
+	
 	if (folder.subfolders) {
 		level = restoreLevel ? restoreLevel : level;
 		level += 1;  // level up!
@@ -346,7 +303,6 @@ com_grahamballantyne_taboverviewsample_app.prototype._overviewClickHandler = fun
 	if (AjxEnv.isIE) {
 		ev = window.event;
 	}
-	// debugger;
 	var dwtev = DwtShell.mouseEvent;
 	dwtev.setFromDhtmlEvent(ev);
 	var el = dwtev.target;
@@ -359,13 +315,14 @@ com_grahamballantyne_taboverviewsample_app.prototype._overviewClickHandler = fun
 		} else {
 			origTarget.className = "ImgNodeExpanded";
 		}
-	} else if (this.handler) {
-		// find the item that was clicked
-		while (el && el.className != 'DwtTreeItem') {
+	} else if (this.handler && origTarget.className !== 'overviewHeader-Text') {
+		var elId;
+		while (el && (el.className != 'DwtTreeItem')) {
 			el = el.parentNode;
+			elId = el.id;
 		}
 		
-		this.handler(el.id);
+		this.handler(elId);
 	}
 };
 
