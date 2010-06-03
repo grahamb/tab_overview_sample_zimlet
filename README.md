@@ -1,6 +1,7 @@
 # Zimbra Tab Zimlet Overview Tree Sample (com\_grahamballantyne\_taboverviewsample)
 
 Github repo: [http://github.com/grahamb/tab\_overview\_sample\_zimlet](http://github.com/grahamb/tab_overview_sample_zimlet)
+
 Forum post: []()
 
 ## The Problem
@@ -13,15 +14,15 @@ A frequent question on the Zimbra forums has been "how do I create a overview tr
 
 * The Dwt toolkit contains methods for creating trees and tree items (DwtTree.js and DwtTreeItem.js). These appear to be used by the 'first-party applications' (e.g. Mail, Calendar)
 * The Dwt methods (like all of Dwt) are poorly documented.
-* Zimbra's own tab zimlets (e.g. Social, Broadsoft) do not use the Dwt framework for creating trees; rather, they have hard-coded HTMl which mimics the same structure.
+* Zimbra's own tab zimlets (e.g. Social, Broadsoft) do not use the Dwt framework for creating trees; rather, they have hard-coded HTML which mimics the same structure.
 
 I'm not a big fan of hard-coding HTML into JavaScript; it makes for ugly code and is inflexible. For example, there's no good way to programmatically manipulate the tree once it has been rendered. Also, it's hard to generate a tree from dynamically-generated data (e.g. a chunk of JSON retrieved from a remote server). I knew there must be a better way, so I set out to build it.
 
 ## The Solution
 
 I like JSON and using object literals to describe data. A folder structure can be easily defined in an object literal:
-`
-var folderGroups = [
+
+`var folderGroups = [
 	{
 		name: "Group One",
 		id: "tabsample_groupOne",
@@ -125,16 +126,15 @@ var folderGroups = [
 			}
 		]
 	}
-];
-`
+];`
 
 The above object literal would generate a tree that looks like [this](http://img.skitch.com/20100603-nutb5b2c3625x5gdf9i3ccbqmp.png):
+
 ![sample zimlet screenshot](http://img.skitch.com/20100603-j7pg8xwjwr14i9xx5yppp6uejk.png)
 
 Folder Groups are an object containing a number of folders/items, each of which can have a number of subfolders/items (and so on). For example, the first group, __Group One__ is described thusly: 
 
-`
-{
+`{
 	name: "Group One",					// the display name rendered in the browser
 	id: "tabsample_groupOne",			// a HTML id assigned to the element
 	handler: function(elId) { ... },	// a callback function to call when an item in the group is clicked
@@ -146,11 +146,10 @@ Folder Groups are an object containing a number of folders/items, each of which 
 			icon: null,							// a CSS class describing an icon (e.g. ImgMailApp). If null or missing, no icon will be displayed.
 			id: "tabsample_groupOne_itemOne"	// a HTML id assigned to the element
 		},
-		item2: { ... },
-		item3: { ... }
+		{ ... },
+		{ ... }
 	]
-}
-`
+}`
 
 Folders with nested subfolders are automatically made collapsable (as in __Group Three__).
 
