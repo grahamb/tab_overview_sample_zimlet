@@ -170,6 +170,19 @@ The HTML needed to build the groups and folder items are all contained in templa
 
 The "global" handler (`this._overviewClickHandler`) is responsible for determining if the user clicked on an expand/collapse handle or on an actual tree item. If they clicked on a handle, the appropriate item will be collapsed or expanded by setting CSS classes on the item. If they clicked on an item in the tree, and a handler was assigned to that item's group in the folderGroups object, that function will be called and the HTML ID of the clicked-upon item will be passed to the function as an argument (`elId`). 
 
+## Requirements
+
+* Zimbra Collaboration Suite 6.0 or better  _-- or --_
+* Zimbra Desktop 2.0 or better
+
+## Installation
+
+### ZCS 6.0
+Either deploy `com_grahamballantyne_taboverviewsample/dist/com_grahamballantyne_taboverviewsample.zip` using `zmzimletctl deploy`, or use the [_dev trick](http://wiki.zimbra.com/wiki/ZCS_6.0:Zimlet_Developers_Guide:Dev_Environment_Setup#Zimlet_Development_Directory) and copy `com_grahamballantyne_taboverviewsample/src/com_grahamballantyne_taboverviewsample` into `{zcs-install-dir}/zimlets-deployed/_dev`
+
+### Zimbra Desktop 2.0
+Either deploy `com_grahamballantyne_taboverviewsample/dist/com_grahamballantyne_taboverviewsample.zip` by copying the zip file into `{zd-user-dir}/zimlets`, or use the [_dev trick](http://wiki.zimbra.com/wiki/ZCS_6.0:Zimlet_Developers_Guide:Dev_Environment_Setup#Zimlet_Development_Directory) and copy `com_grahamballantyne_taboverviewsample/src/com_grahamballantyne_taboverviewsample` into `{zd-install-dir}/zimlets-deployed/_dev`
+
 ## Contributing
 
 This sample is a work in progress. If you have any ideas you'd like to contribute, you can do so in the following ways:
