@@ -175,6 +175,10 @@ The "global" handler (`this._overviewClickHandler`) is responsible for determini
 * Zimbra Collaboration Suite 6.0 or better  _-- or --_
 * Zimbra Desktop 2.0 or better
 
+## Download
+
+Either [clone the source from Github](http://github.com/grahamb/tab\_overview\_sample\_zimlet) (git://github.com/grahamb/tab_overview_sample_zimlet.git) or [download it as a zip file](http://githubcom/grahamb/tab_overview_sample_zimlet/zipball/master).
+
 ## Installation
 
 ### ZCS 6.0
