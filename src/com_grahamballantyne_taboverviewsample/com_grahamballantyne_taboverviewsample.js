@@ -99,62 +99,62 @@ com_grahamballantyne_taboverviewsample_app.prototype.buildOverview = function() 
 				dlg.setMessage(msg, style);
 				dlg.popup();
 			},
-			folders: {
-				item1: {
+			folders: [
+				{
 					name: "Group One Item One",
 					icon: null,
 					id: "tabsample_groupOne_itemOne"
 				},
-				item2: {
+				{
 					name: "Group One Item Two",
 					icon: null,
 					id: "tabsample_groupOne_itemTwo"
 				},
-				item3: {
+				{
 					name: "Group One Item Three",
 					icon: null,
 					id: "tabsample_groupOne_itemThree"
 				}
-			}
+			]
 		},
 		{
 			name: "Group Two",
 			id: "tabsample_groupTwo",
 			handler: this._groupTwoHandler,
-			folders: {
-				item1: {
+			folders: [
+				{
 					name: "Group Two Item One",
 					icon: "ImgMailApp",
 					id: "tabsample_groupTwo_itemOne"
 				},
-				item2: {
+				{
 					name: "Group Two Item Two",
 					icon: "ImgContactsApp",
 					id: "tabsample_groupTwo_itemTwo"
 				},
-				item3: {
+				{
 					name: "Group Two Item Three",
 					icon: "ImgCalendarApp",
 					id: "tabsample_groupTwo_itemThree"
 				}
-			}
+			]
 		},
 		{
 			name: "Group Three",
 			id: "tabsample_groupThree",
 			handler: this._groupThreeHandler,
-			folders: {
-				item1: {
+			folders: [
+				{
 					name: "Group Three Item One",
 					icon: null,
 					id: "tabsample_groupThree_itemOne",
-					subfolders: {
-						sub1: {
+					subfolders: [
+						{
 							name: "Group Three Item One Sub One",
 							icon: null,
 							id: "tabsample_groupThree_itemOne_subOne"
 						},
-						sub2: {
+						{
 							name: "Group Three Item One Sub Two",
 							icon: null,
 							id: "tabsample_groupThree_itemOne_subTwo",
@@ -171,24 +171,24 @@ com_grahamballantyne_taboverviewsample_app.prototype.buildOverview = function() 
 								}
 							}
 						},
-						sub3: {
+						{
 							name: "Group Three Item One Sub Three",
 							icon: null,
 							id: "tabsample_groupThree_itemOne_subThree"
 						}
-					}
+					]
 				},
-				item2: {
+				{
 					name: "Group Three Item Two",
 					icon: null,
 					id: "tabsample_groupThree_itemTwo"
 				},
-				item3: {
+				{
 					name: "Group Three Item Three",
 					icon: null,
 					id: "tabsample_groupThree_itemThree"
 				}
-			}
+			]
 		}
 	];
 	
