@@ -308,8 +308,13 @@ com_grahamballantyne_taboverviewsample_app.prototype._overviewClickHandler = fun
 	var el = dwtev.target;
 	var origTarget = dwtev.target;
 	if (origTarget.className == "ImgNodeExpanded" || origTarget.className == "ImgNodeCollapsed") {
-		var toHide = $(el).parent().parentsUntil('.DwtComposite').parent().next().first();		
-		toHide.toggle();
+
+        while (el.className != "overviewHeader" &&  el.className != "DwtComposite") {
+            el = el.parentNode;
+        }
+        var toHide = el.nextElementSibling;
+        _myToggleElement(toHide);	
+		
 		if (origTarget.className == "ImgNodeExpanded") {
 			origTarget.className = "ImgNodeCollapsed";
 		} else {
@@ -326,7 +331,14 @@ com_grahamballantyne_taboverviewsample_app.prototype._overviewClickHandler = fun
 	}
 };
 
-
+// utility function
+var _myToggleElement =  function (element) {
+    if (element.style.display != 'none') {
+        element.style.display = 'none';
+    } else {
+        element.style.display = 'block';
+    }
+}
 
 /**
  * Click handler for "folder group two". Displays a DwtMsgDialog showing the ID of the selected node.
